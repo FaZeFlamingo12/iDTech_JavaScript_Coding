@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+  <head>
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.12.0.css">
+  </head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.12.0.js"></script>
+    <script src="queue.js"></script>
+    <script src="queue_test.js"></script>
+  </body>
+</html>
+
+/*
+ * A simple queue data type. Queues are entirely mutable.  The
+ * add and remove methods are simple conveniences, but clients
+ * are free to mess with the queue in any way they like.
+ */
+class Queue {
+  constructor() {
+    this.data = []
+  }
+  add(x) {
+    this.data.push(x)
+  }
+  remove() {
+    return this.data.shift()
+  }
+}
+
+QUnit.test("Trivial queue test", assert => {
+    const q1 = new Queue()
+    const q2 = new Queue()
+    q1.add(0)
+    q1.add(1)
+    q1.add(2)
+    q2.add(3)
+    assert.equal(q1.remove(), 0)
+    assert.equal(q2.remove(), 3)
+    assert.equal(q1.remove(), 1)
+  })
